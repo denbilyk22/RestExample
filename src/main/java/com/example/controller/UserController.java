@@ -43,7 +43,7 @@ public class UserController {
         final List<User> users = userService.readAll();
 
         if(users != null && !users.isEmpty()){
-            return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+            return new ResponseEntity<>(users, HttpStatus.OK);
         }
 
         return new ResponseEntity<>("Users haven`t been founded", HttpStatus.NOT_FOUND);
@@ -65,7 +65,7 @@ public class UserController {
                     HttpStatus.OK);
         }
 
-        return new ResponseEntity<>("User does not exist", HttpStatus.NOT_MODIFIED);
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
     @DeleteMapping(value = "/users/{id}")
@@ -84,8 +84,7 @@ public class UserController {
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
 
-        String message  = "User does not exist";
-        return new ResponseEntity<>(message, HttpStatus.NOT_MODIFIED);
+        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
 }
