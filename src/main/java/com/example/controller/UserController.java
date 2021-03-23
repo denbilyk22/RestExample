@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/users/{id}")
-    public ResponseEntity<?> read(@PathVariable(name = "id") int id){
+    public ResponseEntity<?> read(@PathVariable(name = "id") Long id){
         final User user = userService.read(id);
 
         if(user == null){
@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/users/{id}")
-    public ResponseEntity<?> update(@RequestBody User user, @PathVariable(name = "id") int id){
+    public ResponseEntity<?> update(@RequestBody User user, @PathVariable(name = "id") Long id){
 
         String nickname = null;
 
@@ -69,7 +69,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/users/{id}")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") int id){
+    public ResponseEntity<?> delete(@PathVariable(name = "id") Long id){
 
         String nickname = null;
 

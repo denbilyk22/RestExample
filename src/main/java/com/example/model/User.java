@@ -1,16 +1,38 @@
 package com.example.model;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(name = "nickname")
     private String nickname;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "email")
     private String email;
 
-    public Integer getId() {
+    public User() {
+    }
+
+    public User(String nickname, String name, String email) {
+        this.nickname = nickname;
+        this.name = name;
+        this.email = email;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -36,5 +58,15 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nickname='" + nickname + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

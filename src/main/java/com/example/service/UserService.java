@@ -1,10 +1,11 @@
 package com.example.service;
 
 import com.example.model.User;
+import com.example.repository.UserRepository;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService{
 
     /*
     Creating new user
@@ -17,7 +18,7 @@ public interface UserService {
     @param id - user id
     @return - user instance with specified id
     */
-    User read(int id);
+    User read(Long id);
 
     /*
     Reading all users from repository
@@ -31,13 +32,13 @@ public interface UserService {
     @param id - id of user needed to update
     @return - true, if user was updated, else false
     */
-    boolean update(User user, int id);
+    boolean update(User user, Long id);
 
     /*
     Deleting user by ID
     @param id - id of user needed to delete
     @return - true if user was deleted, else false
     */
-    boolean delete(int id);
+    boolean delete(Long id);
 
 }
