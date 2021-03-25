@@ -54,7 +54,7 @@ public class UserController {
             nickname = userServiceInterface.read(id).getNickname();
         }
 
-        final boolean isUpdated= userServiceInterface.update(user, id);
+        final boolean isUpdated = userServiceInterface.update(user, id);
 
         if(isUpdated){
             return new ResponseEntity<>("User " + nickname + " has been updated",
