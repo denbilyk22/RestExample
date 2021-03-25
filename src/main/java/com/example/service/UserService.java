@@ -1,43 +1,52 @@
 package com.example.service;
 
 import com.example.entity.User;
+import com.example.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface UserService{
+@Service
+public class UserService implements UserServiceInterface {
 
-    /*
-    Creating new user
-    @param user - user to create
-    */
-    void create(User user);
+    // Repository of users
+    @Autowired
+    private UserRepository userRepository;
 
-    /*
-    Reading user from repository by id
-    @param id - user id
-    @return - user instance with specified id
-    */
-    User read(Long id);
+    @Override
+    public void create(User user) {
+       userRepository.save(user);
+    }
 
-    /*
-    Reading all users from repository
-    @return - list of existing users
-    */
-    List<User> readAll();
+    @Override
+    public User read(Long id) {
+        return userRepository.getOne(id);
+    }
 
-    /*
-    Updating user with specified ID according to user
-    @param user - user that is base to update existing user
-    @param id - id of user needed to update
-    @return - true, if user was updated, else false
-    */
-    boolean update(User user, Long id);
+    @Override
+    public List<User> readAll() {
+        return userRepository.findAll();
+    }
 
-    /*
-    Deleting user by ID
-    @param id - id of user needed to delete
-    @return - true if user was deleted, else false
-    */
-    boolean delete(Long id);
+    @Override
+    public boolean update(User user, Long id) {
+        if(userRepository.existsById(id)){
+            userRepository.save(user);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean delete(Long id) {
+        if(userRepository.existsById(id)){
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
 
 }
