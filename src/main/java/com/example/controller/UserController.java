@@ -61,7 +61,8 @@ public class UserController {
                     HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        return new ResponseEntity<>("User doesn`t exist",
+                HttpStatus.NOT_MODIFIED);
     }
 
     @DeleteMapping(value = "/users/{id}")
@@ -80,7 +81,8 @@ public class UserController {
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        return new ResponseEntity<>("User doesn`t exist",
+                                    HttpStatus.NOT_MODIFIED);
     }
 
 }
