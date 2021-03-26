@@ -32,6 +32,7 @@ public class UserService implements UserServiceInterface {
     @Override
     public boolean update(User user, Long id) {
         if(userRepository.existsById(id)){
+            user.setId(id);
             userRepository.save(user);
             return true;
         }
