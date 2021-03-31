@@ -1,6 +1,6 @@
-package com.example.config;
+package com.example.restexample.config;
 
-import com.example.entity.Role;
+import com.example.restexample.entity.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

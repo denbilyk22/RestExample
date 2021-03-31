@@ -1,7 +1,7 @@
-package com.example.controller;
+package com.example.restexample.controller;
 
-import com.example.entity.User;
-import com.example.service.UserServiceInterface;
+import com.example.restexample.entity.User;
+import com.example.restexample.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
