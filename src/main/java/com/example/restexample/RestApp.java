@@ -11,10 +11,4 @@ public class RestApp extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(RestApp.class, args);
     }
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(RestApp.class);
-    }
-
 }
