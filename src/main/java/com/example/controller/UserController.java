@@ -5,6 +5,7 @@ import com.example.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,6 +44,11 @@ public class UserController {
         }
 
         return new ResponseEntity<>("Users haven`t been founded", HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/index")
+    public String startPage(Model model){
+        return "index";
     }
 
     @PutMapping(value = "/users/{id}")
