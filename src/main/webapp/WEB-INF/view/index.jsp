@@ -1,6 +1,6 @@
 <%
 String header = "Welcome to the club, buddy!";
-java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", new java.util.Locale("ru"));
+java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", java.util.Locale.UK);
 
 %>
 <!DOCTYPE html>
