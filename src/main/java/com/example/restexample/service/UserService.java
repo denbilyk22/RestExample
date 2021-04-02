@@ -10,25 +10,28 @@ import java.util.List;
 @Service
 public class UserService implements UserServiceInterface {
 
-    // Repository of users
     @Autowired
     private UserRepository userRepository;
 
+    //Create new user in repository
     @Override
     public void create(User user) {
        userRepository.save(user);
     }
 
+    //Find user in repository by id
     @Override
     public User read(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
+    //Find all existing users in repository
     @Override
     public List<User> readAll() {
         return userRepository.findAll();
     }
 
+    //Updating user information
     @Override
     public boolean update(User user, Long id) {
         if(userRepository.existsById(id)){
@@ -40,6 +43,7 @@ public class UserService implements UserServiceInterface {
         return false;
     }
 
+    //Delete user by id if exists
     @Override
     public boolean delete(Long id) {
         if(userRepository.existsById(id)){

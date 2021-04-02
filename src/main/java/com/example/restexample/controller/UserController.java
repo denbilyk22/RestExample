@@ -1,14 +1,15 @@
 package com.example.restexample.controller;
 
 import com.example.restexample.entity.User;
+import com.example.restexample.model.UserModel;
 import com.example.restexample.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class UserController {
@@ -32,11 +33,13 @@ public class UserController {
                                         HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        UserModel userModel = UserModel.toModel(user);
+
+        return new ResponseEntity<>(userModel, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/users")
-    public ResponseEntity<?> readAll(){
+    @GetMapping(value = "/admin/users")
+    public ResponseEntity<?> readAllUsers(){
         final List<User> users = userServiceInterface.readAll();
 
         if(users != null && !users.isEmpty()){
@@ -46,9 +49,32 @@ public class UserController {
         return new ResponseEntity<>("Users haven`t been founded", HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/index")
-    public String startPage(Model model){
-        return "index";
+    @GetMapping(value = "/admin/users/{id}")
+    public ResponseEntity<?> readUser(@PathVariable Long id){
+        final User user = userServiceInterface.read(id);
+
+        if(user == null){
+            return new ResponseEntity<>("User has not been founded",
+                    HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/users")
+    public ResponseEntity<?> readAll(){
+        final List<User> users = userServiceInterface.readAll();
+
+        if(users != null && !users.isEmpty()){
+            final List<UserModel> userModels = users.stream()
+                    .map(UserModel::toModel).collect(Collectors.toList());
+
+            if(!userModels.isEmpty()){
+                return new ResponseEntity<>(userModels, HttpStatus.OK);
+            }
+        }
+
+        return new ResponseEntity<>("Users haven`t been founded", HttpStatus.NOT_FOUND);
     }
 
     @PutMapping(value = "/users/{id}")
