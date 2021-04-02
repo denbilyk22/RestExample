@@ -1,19 +1,26 @@
-package com.example.restexample.entity;
+package com.example.restexample.model;
 
-import javax.persistence.*;
+import com.example.restexample.entity.User;
 
-@Entity
-@Table(name = "users")
-public class User {
+//Model of User entity w/o email for user requests
+public class UserModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nickname;
     private String name;
-    private String email;
 
-    public User() {
+    public UserModel() {
+    }
+
+    //Converting User entity to UserModel
+    public static UserModel toModel(User user){
+
+        UserModel userModel = new UserModel();
+        userModel.setId(user.getId());
+        userModel.setNickname(user.getNickname());
+        userModel.setName(user.getName());
+
+        return userModel;
     }
 
     public Long getId() {
@@ -40,21 +47,12 @@ public class User {
         this.nickname = nickname;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public String toString() {
-        return "User{" +
+        return "UserModel{" +
                 "id=" + id +
                 ", nickname='" + nickname + '\'' +
                 ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
                 '}';
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
+    //Start page view
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
