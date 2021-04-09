@@ -6,6 +6,8 @@ import com.example.restexample.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +26,29 @@ public class UserController {
                                     HttpStatus.CREATED);
     }
 
+    @GetMapping(value = "/users")
+    public ResponseEntity<?> readAll(){
+        final List<User> users = userServiceInterface.readAll();
+
+        if(users != null && !users.isEmpty()){
+
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            String userName = auth.getName();
+
+            if(userName.equalsIgnoreCase("admin")){
+                return new ResponseEntity<>(users, HttpStatus.OK);
+            }
+
+            final List<UserModel> userModels = users.stream()
+                    .map(UserModel::toModel).collect(Collectors.toList());
+
+            return new ResponseEntity<>(userModels, HttpStatus.OK);
+
+        }
+
+        return new ResponseEntity<>("Users haven`t been founded", HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping(value = "/users/{id}")
     public ResponseEntity<?> read(@PathVariable(name = "id") Long id){
         final User user = userServiceInterface.read(id);
@@ -33,48 +58,17 @@ public class UserController {
                                         HttpStatus.NOT_FOUND);
         }
 
-        UserModel userModel = UserModel.toModel(user);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
 
-        return new ResponseEntity<>(userModel, HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/admin/users")
-    public ResponseEntity<?> readAllUsers(){
-        final List<User> users = userServiceInterface.readAll();
-
-        if(users != null && !users.isEmpty()){
-            return new ResponseEntity<>(users, HttpStatus.OK);
+        if(userName.equalsIgnoreCase("admin")){
+            return new ResponseEntity<>(user, HttpStatus.OK);
         }
 
-        return new ResponseEntity<>("Users haven`t been founded", HttpStatus.NOT_FOUND);
-    }
-
-    @GetMapping(value = "/admin/users/{id}")
-    public ResponseEntity<?> readUser(@PathVariable Long id){
-        final User user = userServiceInterface.read(id);
-
-        if(user == null){
-            return new ResponseEntity<>("User has not been founded",
-                    HttpStatus.NOT_FOUND);
+        else {
+            UserModel userModel = UserModel.toModel(user);
+            return new ResponseEntity<>(userModel, HttpStatus.OK);
         }
-
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/users")
-    public ResponseEntity<?> readAll(){
-        final List<User> users = userServiceInterface.readAll();
-
-        if(users != null && !users.isEmpty()){
-            final List<UserModel> userModels = users.stream()
-                    .map(UserModel::toModel).collect(Collectors.toList());
-
-            if(!userModels.isEmpty()){
-                return new ResponseEntity<>(userModels, HttpStatus.OK);
-            }
-        }
-
-        return new ResponseEntity<>("Users haven`t been founded", HttpStatus.NOT_FOUND);
     }
 
     @PutMapping(value = "/users/{id}")
@@ -93,8 +87,7 @@ public class UserController {
                     HttpStatus.OK);
         }
 
-        return new ResponseEntity<>("User doesn`t exist",
-                HttpStatus.NOT_MODIFIED);
+        return new ResponseEntity<>("User doesn`t exist", HttpStatus.NOT_MODIFIED);
     }
 
     @DeleteMapping(value = "/users/{id}")
@@ -113,8 +106,7 @@ public class UserController {
             return new ResponseEntity<>(message, HttpStatus.OK);
         }
 
-        return new ResponseEntity<>("User doesn`t exist",
-                                    HttpStatus.NOT_MODIFIED);
+        return new ResponseEntity<>("User doesn`t exist", HttpStatus.NOT_MODIFIED);
     }
 
 }
