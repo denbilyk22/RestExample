@@ -2,7 +2,7 @@ package com.example.restexample.controller;
 
 import com.example.restexample.entity.User;
 import com.example.restexample.model.UserModel;
-import com.example.restexample.service.UserServiceInterface;
+import com.example.restexample.service.user_service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,19 +14,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping(value = "/users")
 public class UserController {
 
     @Autowired
     private UserServiceInterface userServiceInterface;
 
-    @PostMapping(value = "/users")
+    @PostMapping
     public ResponseEntity<?> create(@RequestBody User user){
         userServiceInterface.create(user);
-        return new ResponseEntity<>("User " + user.getNickname() + " has been created",
+        String nickname = user.getNickname();
+        return new ResponseEntity<>("User " + nickname + " has been created",
                                     HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/users")
+    @GetMapping
     public ResponseEntity<?> readAll(){
         final List<User> users = userServiceInterface.readAll();
 
@@ -49,12 +51,12 @@ public class UserController {
         return new ResponseEntity<>("Users haven`t been founded", HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/users/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<?> read(@PathVariable(name = "id") Long id){
         final User user = userServiceInterface.read(id);
 
         if(user == null){
-            return new ResponseEntity<>("User has not been founded",
+            return new ResponseEntity<>("User doesn`t exist",
                                         HttpStatus.NOT_FOUND);
         }
 
@@ -71,7 +73,7 @@ public class UserController {
         }
     }
 
-    @PutMapping(value = "/users/{id}")
+    @PutMapping(value = "/{id}")
     public ResponseEntity<?> update(@RequestBody User user, @PathVariable(name = "id") Long id){
 
         String nickname = null;
@@ -90,7 +92,7 @@ public class UserController {
         return new ResponseEntity<>("User doesn`t exist", HttpStatus.NOT_MODIFIED);
     }
 
-    @DeleteMapping(value = "/users/{id}")
+    @DeleteMapping(value = "{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") Long id){
 
         String nickname = null;

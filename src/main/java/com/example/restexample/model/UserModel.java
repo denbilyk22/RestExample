@@ -1,6 +1,9 @@
 package com.example.restexample.model;
 
+import com.example.restexample.entity.Task;
 import com.example.restexample.entity.User;
+
+import java.util.List;
 
 //Model of User entity w/o email for user requests
 public class UserModel {
@@ -8,6 +11,7 @@ public class UserModel {
     private Long id;
     private String nickname;
     private String name;
+    private List<Task> tasks;
 
     public UserModel() {
     }
@@ -19,6 +23,7 @@ public class UserModel {
         userModel.setId(user.getId());
         userModel.setNickname(user.getNickname());
         userModel.setName(user.getName());
+        userModel.setTasks(user.getTasks());
 
         return userModel;
     }
@@ -47,12 +52,21 @@ public class UserModel {
         this.nickname = nickname;
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     @Override
     public String toString() {
         return "UserModel{" +
                 "id=" + id +
                 ", nickname='" + nickname + '\'' +
                 ", name='" + name + '\'' +
+                ", tasks=" + tasks +
                 '}';
     }
 }
