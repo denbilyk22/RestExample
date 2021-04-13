@@ -1,5 +1,6 @@
-package com.example.restexample.service;
+package com.example.restexample.service.user_service;
 
+import com.example.restexample.entity.Task;
 import com.example.restexample.entity.User;
 
 import java.util.List;

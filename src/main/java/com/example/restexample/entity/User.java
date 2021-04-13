@@ -1,13 +1,14 @@
 package com.example.restexample.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long id;
 
     @Column(nullable = false)
@@ -18,6 +19,9 @@ public class User {
 
     @Column(nullable = false)
     private String email;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Task> tasks;
     
     public User() {
     }
@@ -54,13 +58,22 @@ public class User {
         this.email = email;
     }
 
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", nickname='" + nickname + '\'' +
                 ", name='" + name + '\'' +
+                ", nickname='" + nickname + '\'' +
                 ", email='" + email + '\'' +
+                ", tasks=" + tasks +
                 '}';
     }
 }
