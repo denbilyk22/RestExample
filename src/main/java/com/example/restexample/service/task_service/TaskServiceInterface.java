@@ -10,7 +10,7 @@ public interface TaskServiceInterface {
     Creating new task
     @param task - task to create
     */
-    void create(Task task);
+    void create(Task task, Long userId);
 
     /*
     Reading task from repository by id

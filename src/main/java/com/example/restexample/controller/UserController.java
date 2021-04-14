@@ -2,6 +2,7 @@ package com.example.restexample.controller;
 
 import com.example.restexample.entity.User;
 import com.example.restexample.model.UserModel;
+import com.example.restexample.model.UserModelAdmin;
 import com.example.restexample.service.user_service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,14 +39,16 @@ public class UserController {
             String userName = auth.getName();
 
             if(userName.equalsIgnoreCase("admin")){
-                return new ResponseEntity<>(users, HttpStatus.OK);
+                final List<UserModelAdmin> userModelsAdmin = users.stream()
+                        .map(UserModelAdmin::toModel).collect(Collectors.toList());
+
+                return new ResponseEntity<>(userModelsAdmin, HttpStatus.OK);
             }
 
             final List<UserModel> userModels = users.stream()
                     .map(UserModel::toModel).collect(Collectors.toList());
 
             return new ResponseEntity<>(userModels, HttpStatus.OK);
-
         }
 
         return new ResponseEntity<>("Users haven`t been founded", HttpStatus.NOT_FOUND);
@@ -64,7 +67,8 @@ public class UserController {
         String userName = auth.getName();
 
         if(userName.equalsIgnoreCase("admin")){
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            UserModelAdmin userModelAdmin = UserModelAdmin.toModel(user);
+            return new ResponseEntity<>(userModelAdmin, HttpStatus.OK);
         }
 
         else {
