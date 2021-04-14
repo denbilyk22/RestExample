@@ -13,8 +13,8 @@ public class Task {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false, columnDefinition = "boolean default 0")
-    private Boolean isDone;
+    @Column(nullable = false)
+    private Boolean completed;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -39,12 +39,12 @@ public class Task {
         this.description = description;
     }
 
-    public Boolean getDone() {
-        return isDone;
+    public Boolean getCompleted() {
+        return completed;
     }
 
-    public void setDone(Boolean done) {
-        isDone = done;
+    public void setCompleted(Boolean done) {
+        completed = done;
     }
 
     public User getUser() {
@@ -60,7 +60,7 @@ public class Task {
         return "Task{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", isDone=" + isDone +
+                ", completed=" + completed +
                 ", user=" + user +
                 '}';
     }

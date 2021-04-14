@@ -1,7 +1,9 @@
 package com.example.restexample.service.task_service;
 
 import com.example.restexample.entity.Task;
+import com.example.restexample.entity.User;
 import com.example.restexample.repository.TaskRepository;
+import com.example.restexample.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,14 @@ public class TaskService implements TaskServiceInterface{
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
-    public void create(Task task) {
+    public void create(Task task, Long userId) {
+        User user = userRepository.findById(userId).get();
+        task.setUser(user);
+
         taskRepository.save(task);
     }
 
