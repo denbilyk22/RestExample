@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <meta charset="UTF-8" />
+    <title>Start page</title>
+</head>
+<style>
+    body{
+        text-align: center;
+        margin-top: 10%;
+    }
+</style>
+<body>
+<h2>Welcome to the club, buddy!</h2>
+<p>Today <div th:text="${#dates.format(#dates.createNow(), 'EEE, dd/MMM/yyyy HH:mm:ss')}"></div></p>
+
+<form action="/login" method="get" id="loginform"></form>
+<button form="loginform" class="btn btn-dark">Login</button>
+
+</body>
+</html>
