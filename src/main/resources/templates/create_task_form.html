@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <title>Create user</title>
+</head>
+<style>
+  .back{
+    text-align: center;
+    margin-top: 2%;
+  }
+  .container{
+    margin-top: 2%;
+  }
+</style>
+<body>
+<form class="back" id="back" method="get" action="/tasks">
+  <button class="btn btn-dark btn-lg">Back</button>
+</form>
+<div class="container">
+  <h1 style="text-align: center">Create task</h1>
+  <form th:action="@{/tasks}" method="post" th:object="${task}">
+    <label for="nickname" class="form-label">Description</label>
+    <input id="nickname" type="text" th:field="*{description}" class="form-control mb-4 col-4" required>
+
+    <div class="form-check">
+      <input class="form-check-input" type="radio" th:field="*{completed}" th:value="${true}" name="flexRadioDefault" id="flexRadioDefault1">
+      <label class="form-check-label" for="flexRadioDefault1">
+        Completed
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" th:field="*{completed}" th:value="${false}" name="flexRadioDefault" id="flexRadioDefault2" checked>
+      <label class="form-check-label" for="flexRadioDefault2">
+        Not completed
+      </label>
+    </div>
+
+    <label for="select">User</label>
+    <select class="form-select" th:field="*{user}" id="select">
+      <option th:each="usr :${users}" th:value="${usr.id}" th:text="${usr.getNickname}" value=""></option>
+    </select><br>
+
+    <button type="submit" class="btn btn-success btn-lg">Create</button>
+  </form>
+</div>
+</body>
+</html>
