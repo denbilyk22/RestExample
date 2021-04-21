@@ -3,7 +3,7 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <meta charset="UTF-8">
-    <title>Welcome!</title>
+    <title>Home</title>
 </head>
 <style>
     h1{
@@ -16,16 +16,16 @@
 </style>
 <body style="text-align: center">
 <form class="logoutform" id="logoutform" method="post" action="/logout">
-    <button type="submit" class="btn btn-dark">Logout</button>
+    <button type="submit" class="btn btn-dark btn-lg">Logout</button>
 </form>
 
 <h1>Welcome home!</h1>
 <div class="btn-group" role="group" aria-label="Basic example">
     <form id="usersform" method="get" action="/users"></form>
-    <button form="usersform" class="btn btn-primary">Users</button>
+    <button form="usersform" class="btn btn-primary btn-lg">Users</button>
 
     <form id="tasksform" method="get" action="/tasks"></form>
-    <button form="tasksform" class="btn btn-primary">Tasks</button>
+    <button form="tasksform" class="btn btn-primary btn-lg">Tasks</button>
 </div>
 </body>
 </html>

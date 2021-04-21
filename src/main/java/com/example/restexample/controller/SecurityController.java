@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class WebController {
+public class SecurityController {
 
     @RequestMapping("/login")
     public String loginPage(Model model){
@@ -14,6 +14,6 @@ public class WebController {
 
     @RequestMapping("/startpage")
     public String startPage(Model model){
-        return "startpage";
+        return "start_page";
     }
 }

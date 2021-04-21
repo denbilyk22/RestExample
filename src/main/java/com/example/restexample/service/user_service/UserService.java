@@ -2,57 +2,43 @@ package com.example.restexample.service.user_service;
 
 import com.example.restexample.entity.Task;
 import com.example.restexample.entity.User;
-import com.example.restexample.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class UserService implements UserServiceInterface {
+public interface UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    /*
+    Creating new user
+    @param user - user to create
+    */
+    void create(User user);
 
-    //Create new user in repository
-    @Override
-    public void create(User user) {
-       userRepository.save(user);
-    }
+    /*
+    Reading user from repository by id
+    @param id - user id
+    @return - user instance with specified id
+    */
+    User read(Long id);
 
-    //Find user in repository by id
-    @Override
-    public User read(Long id) {
-        return userRepository.findById(id).orElse(null);
-    }
+    /*
+    Reading all users from repository
+    @return - list of existing users
+    */
+    List<User> readAll();
 
-    //Find all existing users in repository
-    @Override
-    public List<User> readAll() {
-        return userRepository.findAll();
-    }
+    /*
+    Updating user with specified ID according to user
+    @param user - user that is base to update existing user
+    @param id - id of user needed to update
+    @return - true, if user was updated, else false
+    */
+    boolean update(User user, Long id);
 
-    //Updating user information
-    @Override
-    public boolean update(User user, Long id) {
-        if(userRepository.existsById(id)){
-            user.setId(id);
-            userRepository.save(user);
-            return true;
-        }
-
-        return false;
-    }
-
-    //Delete user by id if exists
-    @Override
-    public boolean delete(Long id) {
-        if(userRepository.existsById(id)){
-            userRepository.deleteById(id);
-            return true;
-        }
-        return false;
-    }
-
+    /*
+    Deleting user by ID
+    @param id - id of user needed to delete
+    @return - true if user was deleted, else false
+    */
+    boolean delete(Long id);
 
 }

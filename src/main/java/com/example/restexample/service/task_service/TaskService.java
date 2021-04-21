@@ -1,58 +1,42 @@
 package com.example.restexample.service.task_service;
 
 import com.example.restexample.entity.Task;
-import com.example.restexample.entity.User;
-import com.example.restexample.repository.TaskRepository;
-import com.example.restexample.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class TaskService implements TaskServiceInterface{
+public interface TaskService {
 
-    @Autowired
-    private TaskRepository taskRepository;
+    /*
+    Creating new task
+    @param task - task to create
+    */
+    void create(Task task, Long userId);
 
-    @Autowired
-    private UserRepository userRepository;
+    /*
+    Reading task from repository by id
+    @param id - task id
+    @return - task instance with specific id
+    */
+    Task read(Long id);
 
-    @Override
-    public void create(Task task, Long userId) {
-        User user = userRepository.findById(userId).get();
-        task.setUser(user);
+    /*
+    Reading all tasks from repository
+    @return - list of existing tasks
+    */
+    List<Task> readAll();
 
-        taskRepository.save(task);
-    }
+    /*
+    Updating task with specific ID
+    @param user - task that is base to update existing task
+    @param id - id of task to update
+    @return - true, if task was updated, else false
+    */
+    boolean update(Task task, Long id);
 
-    @Override
-    public Task read(Long id) {
-        return taskRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public List<Task> readAll() {
-        return taskRepository.findAll();
-    }
-
-    @Override
-    public boolean update(Task task, Long id) {
-        if(taskRepository.existsById(id)){
-            task.setId(id);
-            taskRepository.save(task);
-            return true;
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean delete(Long id) {
-        if(taskRepository.existsById(id)){
-            taskRepository.deleteById(id);
-            return true;
-        }
-        return false;
-    }
+    /*
+    Deleting task by ID
+    @param id - id of task to delete
+    @return - true if task was deleted, else false
+    */
+    boolean delete(Long id);
 }
