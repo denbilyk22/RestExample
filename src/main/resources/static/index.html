@@ -13,7 +13,7 @@
 </style>
 <body>
 <h2>Welcome to the club, buddy!</h2>
-<p>Today <div th:text="${#dates.format(#dates.createNow(), 'EEE, dd/MMM/yyyy HH:mm:ss')}"></div></p>
+<p>Today <strong th:text="${#calendars.format(#calendars.createToday(), 'EEE, dd/MMM/yyyy HH:mm:ss')}"></strong></p>
 
 <form action="/login" method="get" id="loginform"></form>
 <button form="loginform" class="btn btn-dark">Login</button>

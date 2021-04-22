@@ -65,15 +65,4 @@ public class User {
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", email='" + email + '\'' +
-                ", tasks=" + tasks +
-                '}';
-    }
 }

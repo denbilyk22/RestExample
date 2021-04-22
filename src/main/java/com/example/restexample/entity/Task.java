@@ -54,14 +54,4 @@ public class Task {
     public void setUser(User user) {
         this.user = user;
     }
-
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", completed=" + completed +
-                ", user=" + user +
-                '}';
-    }
 }

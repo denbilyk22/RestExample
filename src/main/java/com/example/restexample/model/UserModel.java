@@ -1,17 +1,16 @@
 package com.example.restexample.model;
 
-import com.example.restexample.entity.Task;
 import com.example.restexample.entity.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-//Model of User entity w/o email for user requests
 public class UserModel {
 
     private Long id;
     private String nickname;
     private String name;
+    private String email;
     private List<TaskModel> tasks;
 
     public UserModel() {
@@ -24,6 +23,7 @@ public class UserModel {
         userModel.setId(user.getId());
         userModel.setNickname(user.getNickname());
         userModel.setName(user.getName());
+        userModel.setEmail(user.getEmail());
         userModel.setTasks(user.getTasks().stream().map(TaskModel::toModel).collect(Collectors.toList()));
 
         return userModel;
@@ -51,6 +51,14 @@ public class UserModel {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public List<TaskModel> getTasks() {

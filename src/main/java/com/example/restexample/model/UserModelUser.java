@@ -1,34 +1,32 @@
+/*
 package com.example.restexample.model;
 
-import com.example.restexample.entity.Task;
 import com.example.restexample.entity.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-//Model of User entity with email for admin requests
-public class UserModelAdmin {
+//Model of User entity w/o email for user requests
+public class UserModelUser {
 
     private Long id;
     private String nickname;
     private String name;
-    private String email;
     private List<TaskModel> tasks;
 
-    public UserModelAdmin() {
+    public UserModelUser() {
     }
 
     //Converting User entity to UserModel
-    public static UserModelAdmin toModel(User user){
+    public static UserModelUser toModel(User user){
 
-        UserModelAdmin userModelAdmin = new UserModelAdmin();
-        userModelAdmin.setId(user.getId());
-        userModelAdmin.setNickname(user.getNickname());
-        userModelAdmin.setName(user.getName());
-        userModelAdmin.setEmail(user.getEmail());
-        userModelAdmin.setTasks(user.getTasks().stream().map(TaskModel::toModel).collect(Collectors.toList()));
+        UserModelUser userModelUser = new UserModelUser();
+        userModelUser.setId(user.getId());
+        userModelUser.setNickname(user.getNickname());
+        userModelUser.setName(user.getName());
+        userModelUser.setTasks(user.getTasks().stream().map(TaskModel::toModel).collect(Collectors.toList()));
 
-        return userModelAdmin;
+        return userModelUser;
     }
 
     public Long getId() {
@@ -55,14 +53,6 @@ public class UserModelAdmin {
         this.nickname = nickname;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public List<TaskModel> getTasks() {
         return tasks;
     }
@@ -81,3 +71,4 @@ public class UserModelAdmin {
                 '}';
     }
 }
+*/
