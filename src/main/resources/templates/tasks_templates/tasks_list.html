@@ -26,9 +26,6 @@
 </form>
 <div class="container">
   <h2>Tasks list</h2>
-  <form action="/tasks/createTask" method="get" style="text-align: left">
-    <button class="btn btn-primary btn-lg">Add task</button>
-  </form>
   <table class="table table-bordered">
     <thead>
     <tr>
@@ -41,12 +38,18 @@
     <tbody>
     <tr th:each="task :${tasks}">
       <td th:text="${task.id}"></td>
-      <td th:text="${task.description}"></td>
+      <td>
+        <a th:href="@{/tasks/{id}(id=${task.id})}" th:text="${task.description}"></a>
+      </td>
       <td th:text="${task.completed} ? 'Done' : 'Not done'"></td>
       <td th:text="${task.userNickname}"></td>
     </tr>
     </tbody>
   </table>
+  <br>
+  <form action="/tasks/createTask" method="get">
+    <button class="btn btn-primary btn-lg">Add task</button>
+  </form>
 </div>
 </body>
 </html>
