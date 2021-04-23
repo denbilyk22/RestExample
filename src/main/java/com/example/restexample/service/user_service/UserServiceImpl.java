@@ -3,6 +3,9 @@ package com.example.restexample.service.user_service;
 import com.example.restexample.entity.User;
 import com.example.restexample.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +32,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> readAll() {
         return userRepository.findAll();
+    }
+
+    //Find all existing users in repository with pagination
+    @Override
+    public Page<User> readAllPaginated(int pageNumber, int pageSize) {
+        Pageable pageRequest = PageRequest.of(pageNumber - 1, pageSize);
+        return userRepository.findAll(pageRequest);
     }
 
     //Updating user information
