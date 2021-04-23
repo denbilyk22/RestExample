@@ -1,6 +1,8 @@
 package com.example.restexample.service.task_service;
 
 import com.example.restexample.entity.Task;
+import com.example.restexample.entity.User;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -24,6 +26,14 @@ public interface TaskService {
     @return - list of existing tasks
     */
     List<Task> readAll();
+
+    /*
+    Reading all tasks from repository and divide content into pages
+    @param pageNumber - number of page to display
+    @param pageSize - number of tasks to display on the page
+    @return - page of existing tasks
+    */
+    Page<Task> readAllPaginated(int pageNumber, int pageSize);
 
     /*
     Updating task with specific ID

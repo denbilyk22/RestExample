@@ -46,7 +46,20 @@
     </tr>
     </tbody>
   </table>
-  <br>
+  <nav th:if="${totalPages>1}" aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item">
+        <a th:if="${currentPage>1}" th:href="@{/tasks(page=${currentPage-1})}" class="page-link">Previous</a>
+      </li>
+      <li th:each="i: ${#numbers.sequence(1, totalPages)}" th:class="${i==currentPage} ? 'page-item active' : 'page-item'">
+        <a th:if="${currentPage!=i}" th:href="@{/tasks(page=${i})}" th:text="${i}" class="page-link"></a>
+        <a th:unless="${currentPage!=i}" th:text="${i}" class="page-link" ></a>
+      </li>
+      <li class="page-item">
+        <a th:if="${currentPage<totalPages}" th:href="@{/tasks(page=${currentPage+1})}" class="page-link">Next</a>
+      </li>
+    </ul>
+  </nav>
   <form action="/tasks/createTask" method="get">
     <button class="btn btn-primary btn-lg">Add task</button>
   </form>

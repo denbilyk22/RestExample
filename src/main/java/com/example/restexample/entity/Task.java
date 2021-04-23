@@ -14,7 +14,7 @@ public class Task {
     private String description;
 
     @Column(nullable = false)
-    private Boolean completed;
+    private Boolean completed = false;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

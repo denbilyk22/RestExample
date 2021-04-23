@@ -2,6 +2,7 @@ package com.example.restexample.service.user_service;
 
 import com.example.restexample.entity.Task;
 import com.example.restexample.entity.User;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -25,6 +26,14 @@ public interface UserService {
     @return - list of existing users
     */
     List<User> readAll();
+
+    /*
+    Reading all users from repository and divide content into pages
+    @param pageNumber - number of page to display
+    @param pageSize - number of users to display on the page
+    @return - page of existing users
+    */
+    Page<User> readAllPaginated(int pageNumber, int pageSize);
 
     /*
     Updating user with specified ID according to user
