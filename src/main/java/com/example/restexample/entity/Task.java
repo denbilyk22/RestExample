@@ -1,9 +1,14 @@
 package com.example.restexample.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "tasks")
+@NoArgsConstructor @Getter @Setter
 public class Task {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,38 +25,4 @@ public class Task {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Task() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Boolean getCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(Boolean done) {
-        completed = done;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
