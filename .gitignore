@@ -8,3 +8,4 @@
 /httpRequests/
 #target ignoring
 /target/
+.idea/
